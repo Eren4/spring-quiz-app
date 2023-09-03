@@ -33,4 +33,8 @@ public class QuestionService {
     public void deleteQuestion(Question question) {
         questionRepository.delete(question);
     }
+
+    public void deleteAllQuestions() {
+        questionRepository.deleteAll();
+    }
 }

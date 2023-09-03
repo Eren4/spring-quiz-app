@@ -5,18 +5,31 @@ import com.netchum.quizapp.entity.Question;
 import com.netchum.quizapp.service.AdminService;
 import com.netchum.quizapp.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
 public class AdminController {
+
+    @Value("${spring.datasource.url}")
+    String jdbcUrl;
+
+    @Value("${spring.datasource.username}")
+    String username;
+
+    @Value("${spring.datasource.password}")
+    String password;
 
     @Autowired
     AdminService adminService;
@@ -130,6 +143,8 @@ public class AdminController {
             questionService.deleteQuestion(questionOptional.get());
         }
 
+        resetQuestions();
+
         model.addAttribute("questions", getSortedQuestions());
 
         return "admin-question-list-page";
@@ -143,4 +158,30 @@ public class AdminController {
         return questions;
     }
 
+    private void resetQuestions() {
+        List<Question> allQuestions = questionService.getAllQuestions();
+
+        questionService.deleteAllQuestions();
+
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+            String resetSequenceSQL = "alter sequence question_id_seq restart with 1;";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(resetSequenceSQL)) {
+                preparedStatement.executeUpdate();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        for(Question question : allQuestions) {
+            questionService.updateQuestion(
+                    new Question(question.getQuestionText(),
+                            question.getOption0(),
+                            question.getOption1(),
+                            question.getOption2(),
+                            question.getOption3(),
+                            question.getCorrectOptionIndex()));
+        }
+    }
 }
