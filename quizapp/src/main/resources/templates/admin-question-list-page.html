@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Question List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td, th {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .action-button {
+            text-decoration: none;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .form-button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h1>Question List</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Question</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="question : ${questions}">
+        <td th:text="${question.id}"></td>
+        <td th:text="${question.questionText}"></td>
+        <td><input type="submit" value="Edit"></td>
+        <td><input type="submit" value="Delete"></td>
+    </tr>
+    </tbody>
+</table>
+
+<input type="submit" value="Add Question">
+
+<br> <br>
+
+<form action="/" method="get">
+    <input type="submit" value="Return to Home Page">
+</form>
+</body>
+</html>
