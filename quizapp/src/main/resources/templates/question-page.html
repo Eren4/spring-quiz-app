@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Question Page</title>
+</head>
+<body>
+<h1>Quiz Question</h1>
+<p>Hello, <span th:text="${username}"></span>! Answer the following question:</p>
+
+<div>
+    <p>Question <span th:text="${currentQuestion}"></span>:</p>
+    <p th:text="${question.questionText}"></p>
+</div>
+
+<form action="/quiz/question" method="post">
+    <input type="hidden" name="questionId" th:value="${question.id}">
+    <div>
+        <label for="option1">
+            <input type="radio" id="option1" name="selectedOption" value="0"> <span th:text="${question.option1}"></span>
+        </label>
+    </div>
+    <div>
+        <label for="option2">
+            <input type="radio" id="option2" name="selectedOption" value="1"> <span th:text="${question.option2}"></span>
+        </label>
+    </div>
+    <div>
+        <label for="option3">
+            <input type="radio" id="option3" name="selectedOption" value="2"> <span th:text="${question.option3}"></span>
+        </label>
+    </div>
+    <div>
+        <label for="option4">
+            <input type="radio" id="option4" name="selectedOption" value="3"> <span th:text="${question.option4}"></span>
+        </label>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
