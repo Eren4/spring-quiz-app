@@ -25,4 +25,8 @@ public class QuestionService {
     public Optional<Question> getQuestionById(int id) {
         return questionRepository.findById(id);
     }
+
+    public void updateQuestion(Question question) {
+        questionRepository.save(question);
+    }
 }

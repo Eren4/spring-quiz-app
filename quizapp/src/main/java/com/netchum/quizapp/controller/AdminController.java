@@ -1,6 +1,7 @@
 package com.netchum.quizapp.controller;
 
 import com.netchum.quizapp.entity.Admin;
+import com.netchum.quizapp.entity.Question;
 import com.netchum.quizapp.service.AdminService;
 import com.netchum.quizapp.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,29 @@ public class AdminController {
             model.addAttribute("adminError", "Incorrect email or password");
             return "admin-login-page";
         }
+
+        model.addAttribute("questions", questionService.getAllQuestions());
+
+        return "admin-question-list-page";
+    }
+
+    @GetMapping("/create-new-question")
+    public String showCreateQuestionPage() {
+        return "question-creation-page";
+    }
+
+    @PostMapping("/create-question")
+    public String createQuestion(@RequestParam("questionText") String questionText,
+                                 @RequestParam("option0") String option0,
+                                 @RequestParam("option1") String option1,
+                                 @RequestParam("option2") String option2,
+                                 @RequestParam("option3") String option3,
+                                 @RequestParam("correctOptionIndex") int correctOptionIndex,
+                                 Model model) {
+
+        Question question = new Question(questionText, option0, option1, option2, option3, correctOptionIndex);
+
+        questionService.updateQuestion(question);
 
         model.addAttribute("questions", questionService.getAllQuestions());
 
