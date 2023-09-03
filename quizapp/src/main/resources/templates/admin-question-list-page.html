@@ -56,12 +56,17 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="question : ${questions}">
-        <td th:text="${question.id}"></td>
-        <td th:text="${question.questionText}"></td>
-        <td><input type="submit" value="Edit"></td>
-        <td><input type="submit" value="Delete"></td>
-    </tr>
+        <tr th:each="question : ${questions}">
+            <td th:text="${question.id}"></td>
+            <td th:text="${question.questionText}"></td>
+            <td>
+                <form action="/edit-question" method="post">
+                    <input type="hidden" name="questionId" th:value="${question.id}">
+                    <input type="submit" value="Edit">
+                </form>
+            </td>
+            <td><input type="submit" value="Delete"></td>
+        </tr>
     </tbody>
 </table>
 
