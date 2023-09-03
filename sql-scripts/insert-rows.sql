@@ -1,7 +1,13 @@
+delete from quiz_taker;
+delete from question;
+
+alter sequence quiz_taker_id_seq restart with 1;
+alter sequence question_id_seq restart with 1;
+
 insert into quiz_taker(username, score, date_registered)
-values('Joe', 50, '2022-05-14'),
+values('Joe', 40, '2022-05-14'),
 ('Jack', 80, '2022-08-02'),
-('Eileen', 95, '2023-02-23');
+('Eileen', 60, '2023-02-23');
 
 insert into question(question_text, option_0, option_1,
 option_2, option_3, correct_option_index)

@@ -73,17 +73,22 @@ public class QuizController {
                                  HttpSession session,
                                  Model model) {
 
-        QuizTaker quizTaker = quizTakerService.getQuizTakerByUsername(username);
-
-        model.addAttribute("username", quizTaker.getUsername());
-        model.addAttribute("score", quizTaker.getScore());
-        model.addAttribute("date", quizTaker.getDateRegistered());
-
         // Retrieve the current progress (current question number) from the session or database
         Integer currentQuestionId = (Integer) session.getAttribute("currentQuestionId");
 
         // Check if it's the final question (you need to know the total number of questions)
         int totalQuestions = questionService.getAllQuestions().size(); // Implement this method
+
+        int scoreValue = (int) (100 / totalQuestions);
+
+        Question question = questionService.getQuestionById(currentQuestionId).get();
+
+        QuizTaker quizTaker = quizTakerService.getQuizTakerByUsername(username);
+
+        if(question.getCorrectOptionIndex() == selectedOption) {
+            quizTaker.increaseScore(scoreValue);
+            quizTakerService.updateQuizTaker(quizTaker);
+        }
 
         if (currentQuestionId < totalQuestions) {
             // If not the final question, increment the current question number
@@ -92,6 +97,9 @@ public class QuizController {
             return "redirect:/question"; // Redirect to the next question
         } else {
             // If it's the final question, redirect to the finish page
+            model.addAttribute("username", quizTaker.getUsername());
+            model.addAttribute("score", quizTaker.getScore());
+            model.addAttribute("date", quizTaker.getDateRegistered());
             return "finish-page";
         }
     }

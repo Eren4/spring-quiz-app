@@ -65,6 +65,10 @@ public class QuizTaker {
         this.dateRegistered = dateRegistered;
     }
 
+    public void increaseScore(int value) {
+        this.score += value;
+    }
+
     @Override
     public String toString() {
         return "QuizTaker{" +
