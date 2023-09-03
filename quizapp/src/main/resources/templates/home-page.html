@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+<h1>Welcome to the Quiz App!</h1>
+
+<p>If you're ready, you can enter your username below and start taking the quiz!</p>
+
+<div th:if="${usernameError}" class="error-message">
+    <p th:text="${usernameError}"></p>
+</div>
+
+<form>
+    <p>Username: <input type="text" th:name="username"></p>
+
+    <input type="submit" value="Start!">
+</form>
+</body>
+</html>
