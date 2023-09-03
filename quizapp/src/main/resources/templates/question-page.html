@@ -38,7 +38,19 @@
 
     <br>
 
-    <button type="submit">Submit</button>
+    <button type="submit" id="submit-button" disabled>Submit</button>
 </form>
+<script>
+    const radioButtons = document.querySelectorAll('input[type="radio"]');
+    const submitButton = document.getElementById('submit-button');
+
+    radioButtons.forEach((radio) => {
+        radio.addEventListener('change', () => {
+            // Check if any radio button is selected
+            const anySelected = [...radioButtons].some((radio) => radio.checked);
+            submitButton.disabled = !anySelected;
+        });
+    });
+</script>
 </body>
 </html>
