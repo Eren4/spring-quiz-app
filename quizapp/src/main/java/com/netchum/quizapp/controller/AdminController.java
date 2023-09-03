@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -36,7 +38,7 @@ public class AdminController {
             return "admin-login-page";
         }
 
-        model.addAttribute("questions", questionService.getAllQuestions());
+        model.addAttribute("questions", getSortedQuestions());
 
         return "admin-question-list-page";
     }
@@ -59,7 +61,7 @@ public class AdminController {
 
         questionService.updateQuestion(question);
 
-        model.addAttribute("questions", questionService.getAllQuestions());
+        model.addAttribute("questions", getSortedQuestions());
 
         return "admin-question-list-page";
     }
@@ -100,9 +102,45 @@ public class AdminController {
 
         questionService.updateQuestion(question);
 
-        model.addAttribute("questions", questionService.getAllQuestions());
+        model.addAttribute("questions", getSortedQuestions());
 
         return "admin-question-list-page";
+    }
+
+    @PostMapping("/delete-question")
+    public String deleteQuestionPage(@RequestParam("questionId") int questionId, Model model) {
+
+        Optional<Question> questionOptional = questionService.getQuestionById(questionId);
+
+        if(questionOptional.isPresent()) {
+            Question question = questionOptional.get();
+            model.addAttribute("questionId", question.getId());
+            model.addAttribute("questionText", question.getQuestionText());
+        }
+
+        return "question-deleting-page";
+    }
+
+    @PostMapping("/question-deleted")
+    public String questionDeleted(@RequestParam("questionId") int questionId, Model model) {
+
+        Optional<Question> questionOptional = questionService.getQuestionById(questionId);
+
+        if(questionOptional.isPresent()) {
+            questionService.deleteQuestion(questionOptional.get());
+        }
+
+        model.addAttribute("questions", getSortedQuestions());
+
+        return "admin-question-list-page";
+    }
+
+    private List<Question> getSortedQuestions() {
+        List<Question> questions = questionService.getAllQuestions();
+
+        questions.sort(Comparator.comparing(Question::getId));
+
+        return questions;
     }
 
 }

@@ -11,7 +11,15 @@
 
 <span th:text="${questionText}"></span>
 
-<input type="submit" value="Delete">
+<br> <br>
+
+<form action="/question-deleted" method="post">
+    <input type="hidden" name="questionId" th:value="${questionId}">
+    <input type="submit" value="Delete">
+</form>
+
+
+<br> <br>
 
 <button onclick="goBack()">Cancel</button>
 

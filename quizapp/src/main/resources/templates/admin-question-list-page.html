@@ -65,7 +65,12 @@
                     <input type="submit" value="Edit">
                 </form>
             </td>
-            <td><input type="submit" value="Delete"></td>
+            <td>
+                <form action="/delete-question" method="post">
+                    <input type="hidden" name="questionId" th:value="${question.id}">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
         </tr>
     </tbody>
 </table>

@@ -29,4 +29,8 @@ public class QuestionService {
     public void updateQuestion(Question question) {
         questionRepository.save(question);
     }
+
+    public void deleteQuestion(Question question) {
+        questionRepository.delete(question);
+    }
 }

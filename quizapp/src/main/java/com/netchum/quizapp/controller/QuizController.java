@@ -42,8 +42,10 @@ public class QuizController {
             return "home-page";
         }
 
+        int firstQuestionId = questionService.getAllQuestions().get(0).getId();
+
         session.setAttribute("username", username);
-        session.setAttribute("currentQuestionId", 1);
+        session.setAttribute("currentQuestionId", firstQuestionId);
 
         QuizTaker quizTaker = new QuizTaker(username, 0, LocalDate.now());
 
@@ -94,9 +96,12 @@ public class QuizController {
         if (currentQuestionId < totalQuestions) {
             // If not the final question, increment the current question number
             currentQuestionId++;
+
             session.setAttribute("currentQuestionId", currentQuestionId);
+
             return "redirect:/question"; // Redirect to the next question
-        } else {
+        }
+        else {
             // If it's the final question, redirect to the finish page
             model.addAttribute("username", quizTaker.getUsername());
             model.addAttribute("score", quizTaker.getScore());
