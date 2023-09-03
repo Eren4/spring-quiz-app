@@ -26,20 +26,9 @@ public class QuizController {
     }
 
     @PostMapping("/start")
-    public String startQuiz(@RequestParam("username") String username, HttpSession session) {
-        // Store the username and initialize progress (current question number) in the session or database
-        session.setAttribute("username", username);
-        session.setAttribute("currentQuestion", 1); // Start from the first question
-        return "redirect:/quiz/question"; // Redirect to the first question
-    }
-
-    @PostMapping("/question/{questionNumber}")
-    public String startQuiz(@PathVariable int questionNumber,
-                            @RequestParam("username") String username,
+    public String startQuiz(@RequestParam("username") String username,
+                            HttpSession session,
                             Model model) {
-
-        List<Question> questions = questionService.getAllQuestions();
-
 
         model.addAttribute("username", username);
 
