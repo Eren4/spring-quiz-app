@@ -5,7 +5,7 @@ values('Joe', 50, '2022-05-14'),
 
 insert into question(question_text, option_0, option_1,
 option_2, option_3, correct_option_index)
-values('2 + 2 = ?', '0', '1', '2', '3', 2),
+values('2 + 2 = ?', '0', '1', '4', '3', 2),
 ('What is Java?', 'A car', 'A programming language',
 'A phone', 'A star', 1),
 ('What is the star in our solar system called?',

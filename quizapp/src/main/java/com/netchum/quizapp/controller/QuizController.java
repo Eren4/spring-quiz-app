@@ -64,7 +64,12 @@ public class QuizController {
     }
 
     @PostMapping("/question")
-    public String answerQuestion(@RequestParam("selectedOption") int selectedOption, HttpSession session) {
+    public String answerQuestion(@RequestParam("selectedOption") int selectedOption,
+                                 @RequestParam("username") String username,
+                                 HttpSession session,
+                                 Model model) {
+        model.addAttribute("username", username);
+
         // Retrieve the current progress (current question number) from the session or database
         Integer currentQuestionId = (Integer) session.getAttribute("currentQuestionId");
 

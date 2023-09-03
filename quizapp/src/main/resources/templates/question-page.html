@@ -7,8 +7,6 @@
 <body>
 <h1>Quiz Question</h1>
 
-<p>Hello, <span th:text="${username}"></span>! Answer the following question:</p>
-
 <div>
     <p>Question <span th:text="${currentQuestionId}"></span>:</p>
     <p th:text="${question.questionText}"></p>
@@ -16,6 +14,7 @@
 
 <form action="/question" method="post">
     <input type="hidden" name="questionId" th:value="${question.id}">
+    <input type="hidden" name="username" th:value="${username}">
     <div>
         <label for="option0">
             <input type="radio" id="option0" name="selectedOption" value="0"> <span th:text="${question.option0}"></span>
