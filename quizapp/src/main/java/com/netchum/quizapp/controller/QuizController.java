@@ -95,4 +95,9 @@ public class QuizController {
             return "finish-page";
         }
     }
+
+    @GetMapping("/leaderboard")
+    public String showLeaderboard() {
+        return "leaderboard-page";
+    }
 }
