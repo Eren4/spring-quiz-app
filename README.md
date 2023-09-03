@@ -10,6 +10,8 @@ If the username is already taken, then an error message is displayed
   
 After completing the quiz, the user can view their results  
   
+The results will be stored in the database  
+  
 If they prefer, they can see where they are in the leaderboard  
   
 Admins can add, edit and delete questions  
