@@ -16,6 +16,9 @@ public class Question {
     @Column(name = "question_text")
     private String questionText;
 
+    @Column(name = "option_0")
+    private String option0;
+
     @Column(name = "option_1")
     private String option1;
 
@@ -25,9 +28,6 @@ public class Question {
     @Column(name = "option_3")
     private String option3;
 
-    @Column(name = "option_4")
-    private String option4;
-
     @Column(name = "correct_option_index")
     private int correctOptionIndex;
 
@@ -35,12 +35,12 @@ public class Question {
 
     }
 
-    public Question(String questionText, String option1, String option2, String option3, String option4, int correctOptionIndex) {
+    public Question(String questionText, String option0, String option1, String option2, String option3, int correctOptionIndex) {
         this.questionText = questionText;
+        this.option0 = option0;
         this.option1 = option1;
         this.option2 = option2;
         this.option3 = option3;
-        this.option4 = option4;
         this.correctOptionIndex = correctOptionIndex;
     }
 
@@ -58,6 +58,14 @@ public class Question {
 
     public void setQuestionText(String questionText) {
         this.questionText = questionText;
+    }
+
+    public String getOption0() {
+        return option0;
+    }
+
+    public void setOption0(String option0) {
+        this.option0 = option0;
     }
 
     public String getOption1() {
@@ -84,14 +92,6 @@ public class Question {
         this.option3 = option3;
     }
 
-    public String getOption4() {
-        return option4;
-    }
-
-    public void setOption4(String option4) {
-        this.option4 = option4;
-    }
-
     public int getCorrectOptionIndex() {
         return correctOptionIndex;
     }
@@ -100,19 +100,15 @@ public class Question {
         this.correctOptionIndex = correctOptionIndex;
     }
 
-    public List<String> getAllOptions() {
-        return List.of(getOption1(), getOption2(), getOption3(), getOption4());
-    }
-
     @Override
     public String toString() {
         return "Question{" +
                 "id=" + id +
                 ", questionText='" + questionText + '\'' +
+                ", option0='" + option0 + '\'' +
                 ", option1='" + option1 + '\'' +
                 ", option2='" + option2 + '\'' +
                 ", option3='" + option3 + '\'' +
-                ", option4='" + option4 + '\'' +
                 ", correctOptionIndex=" + correctOptionIndex +
                 '}';
     }
