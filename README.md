@@ -1,4 +1,5 @@
-#Spring Boot Quiz App
+#Spring Boot Quiz App  
+
 A quiz app created with Spring Boot to develop my skills  
   
 PostgreSQL was used to store user, question and admin data  
