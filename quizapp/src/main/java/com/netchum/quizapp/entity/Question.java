@@ -2,6 +2,8 @@ package com.netchum.quizapp.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Question {
 
@@ -95,6 +97,10 @@ public class Question {
 
     public void setCorrectOptionIndex(int correctOptionIndex) {
         this.correctOptionIndex = correctOptionIndex;
+    }
+
+    public List<String> getAllOptions() {
+        return List.of(getOption1(), getOption2(), getOption3(), getOption4());
     }
 
     @Override
