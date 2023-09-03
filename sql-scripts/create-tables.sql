@@ -1,15 +1,16 @@
-CREATE TABLE QUIZ_TAKER(
-	ID SERIAL INT PRIMARY KEY,
-	USERNAME VARCHAR(50),
-	SCORE INT
+create table quiz_taker(
+	id serial primary key,
+	username varchar(50),
+	score int,
+	date_registered date
 );
 
-CREATE TABLE QUESTION(
-	ID SERIAL INT PRIMARY KEY,
-	QUESTION_TEXT VARCHAR(255),
-	OPTION_0 VARCHAR(255),
-	OPTION_1 VARCHAR(255),
-	OPTION_2 VARCHAR(255),
-	OPTION_3 VARCHAR(255),
-	CORRECT_OPTION_INDEX INT
+create table question(
+	id serial primary key,
+	question_text varchar(255),
+	option_0 varchar(255),
+	option_1 varchar(255),
+	option_2 varchar(255),
+	option_3 varchar(255),
+	correct_option_index int
 );
