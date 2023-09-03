@@ -1,8 +1,10 @@
 delete from quiz_taker;
 delete from question;
+delete from admin;
 
 alter sequence quiz_taker_id_seq restart with 1;
 alter sequence question_id_seq restart with 1;
+alter sequence admin_id_seq restart with 1;
 
 insert into quiz_taker(username, score, date_registered)
 values('Joe', 40, '2022-05-14'),
@@ -21,3 +23,7 @@ values('2 + 2 = ?', '0', '1', '4', '3', 2),
 'Fevzi Çakmak', 0),
 ('In which mythology does the underground god Erlik belong?',
 'Scandinavian', 'Greek', 'Aztec', 'Turkic', 3);
+
+insert into admin(email, username, password)
+values('bob@email.com', 'Bob', 
+'$2a$10$ylBENTRqsDYkVWZtcOfTQujragQs9yjLcV1VvPtF/JuwVN.zj3Hwu');

@@ -1,5 +1,6 @@
 drop table if exists quiz_taker cascade;
 drop table if exists question cascade;
+drop table if exists admin cascade;
 
 create table quiz_taker(
 	id serial primary key,
@@ -16,4 +17,11 @@ create table question(
 	option_2 varchar(255),
 	option_3 varchar(255),
 	correct_option_index int
+);
+
+create table admin(
+	id serial primary key,
+	email varchar(255),
+	username varchar(255),
+	password varchar(255)
 );
