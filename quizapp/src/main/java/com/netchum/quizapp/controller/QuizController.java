@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -104,8 +105,15 @@ public class QuizController {
         }
     }
 
-    @GetMapping("/leaderboard")
-    public String showLeaderboard() {
+    @PostMapping("/leaderboard")
+    public String showLeaderboard(Model model) {
+
+        List<QuizTaker> quizTakers = quizTakerService.getAllQuizTakers();
+
+        quizTakers.sort(Comparator.comparing(QuizTaker::getScore).reversed());
+
+        model.addAttribute("quizTakers", quizTakers);
+
         return "leaderboard-page";
     }
 }

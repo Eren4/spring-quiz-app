@@ -5,6 +5,7 @@ import com.netchum.quizapp.repository.QuizTakerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,5 +28,9 @@ public class QuizTakerService {
 
     public void updateQuizTaker(QuizTaker quizTaker) {
         quizTakerRepository.save(quizTaker);
+    }
+
+    public List<QuizTaker> getAllQuizTakers() {
+        return quizTakerRepository.findAll();
     }
 }
