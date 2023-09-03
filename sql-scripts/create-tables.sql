@@ -1,3 +1,6 @@
+drop table if exists quiz_taker cascade;
+drop table if exists question cascade;
+
 create table quiz_taker(
 	id serial primary key,
 	username varchar(50),
