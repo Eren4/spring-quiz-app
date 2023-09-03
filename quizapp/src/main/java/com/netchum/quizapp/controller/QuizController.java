@@ -32,7 +32,11 @@ public class QuizController {
     public String startQuiz(@RequestParam("username") String username,
                             HttpSession session,
                             Model model) {
-        if(quizTakerService.quizTakerByUsernameExists(username)) {
+        if(username.isEmpty()) {
+            model.addAttribute("usernameEmptyError", "Please don't leave your username empty");
+            return "home-page";
+        }
+        else if(quizTakerService.quizTakerByUsernameExists(username)) {
             model.addAttribute("usernameError", "User already exists.");
             return "home-page";
         }
@@ -40,9 +44,9 @@ public class QuizController {
         session.setAttribute("username", username);
         session.setAttribute("currentQuestionId", 1);
 
-//        QuizTaker quizTaker = new QuizTaker(username, 0, LocalDate.now());
-//
-//        quizTakerService.updateQuizTaker(quizTaker);
+        QuizTaker quizTaker = new QuizTaker(username, 0, LocalDate.now());
+
+        quizTakerService.updateQuizTaker(quizTaker);
 
         return "redirect:/question";
     }
@@ -68,7 +72,12 @@ public class QuizController {
                                  @RequestParam("username") String username,
                                  HttpSession session,
                                  Model model) {
-        model.addAttribute("username", username);
+
+        QuizTaker quizTaker = quizTakerService.getQuizTakerByUsername(username);
+
+        model.addAttribute("username", quizTaker.getUsername());
+        model.addAttribute("score", quizTaker.getScore());
+        model.addAttribute("date", quizTaker.getDateRegistered());
 
         // Retrieve the current progress (current question number) from the session or database
         Integer currentQuestionId = (Integer) session.getAttribute("currentQuestionId");

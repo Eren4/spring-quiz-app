@@ -6,7 +6,21 @@
 </head>
 <body>
 
-<h1>Finish Page <span th:text="${username}"></span></h1>
+<h1>Results</h1>
+
+<p>Date taken: <span th:text="${date}"></span></p>
+<p>Name: <span th:text="${username}"></span></p>
+<p>Score: <span th:text="${score}"></span></p>
+
+<form action="/leaderboard" method="get">
+    <input type="submit" value="Leaderboard">
+</form>
+
+<br>
+
+<form action="/" method="get">
+    <input type="submit" value="Home Page">
+</form>
 
 </body>
 </html>

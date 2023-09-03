@@ -14,6 +14,10 @@
 
 <p>If you're ready, you can enter your username below and start taking the quiz!</p>
 
+<div th:if="${usernameEmptyError}" class="error-message">
+    <p th:text="${usernameEmptyError}"></p>
+</div>
+
 <div th:if="${usernameError}" class="error-message">
     <p th:text="${usernameError}"></p>
 </div>
